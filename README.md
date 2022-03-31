@@ -20,7 +20,7 @@ For more information on *Hamming Code*:
 - [3Blue1Brown](https://www.youtube.com/watch?v=X8jsijhllIA&t=906s) - 2 Videos which explains it well in simple language.
 - [Wikipedia](https://en.wikipedia.org/wiki/Hamming_code) - there are a lot of websites and books that explain hamming code well.
 
-#### **Comiplation**:
+### **Comiplation**:
 1. Compile via Visual Studio -
 - Open project in Visual Studio.
 - Build Solution & Run (F5/ctrl + F5).
@@ -34,7 +34,7 @@ For more information on *Hamming Code*:
 * for more information : [https://docs.microsoft.com](https://docs.microsoft.com/en-us/cpp/build/walkthrough-compiling-a-native-cpp-program-on-the-command-line?view=msvc-170).
 
 
-#### **Operation & Conditions**:
+### **Operation & Conditions**:
 1. The first file must be channel.c such that we will have the ports numbers and ip number. the order doesn't matter between sender.c and receiver.c.
 2. To continue to another channel interval answer 'yes' (case-unsensitive), every other answer will stop channel's run.
 3. To continue to another sender/receiver interval put in an existing file name with suffix to be read, non-valid name will end the run.
