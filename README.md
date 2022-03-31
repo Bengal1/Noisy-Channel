@@ -11,7 +11,7 @@ the channel in the command line arguments the type of noise and a integer n (noi
 The channel receives data from the sender and add noise to it according to the set arguments, and send it to the receiver.
 
 The sender gets in the command line arguments IP number and port number (manually insert from the server output). With those argument the sender connects to the channel via TCP socket.
-The sender gets from stdin a file name (or full path to it) with suffix, read all data from the file, encode it with `hamming-code(31,26,3)` method and send it to the channel via TCP socket in 4 bytes portions.
+The sender gets from stdin a file name (or full path to it) with suffix, read all data from the file, encode it with *hamming-code(31,26,3)* method and send it to the channel via TCP socket in 4 bytes portions.
 
 The receiver gets in the command line arguments IP number and port number (manually insert from the server output). With those argument the sender connects to the channel via TCP socket.
 The sender gets from stdin a file name (or full path to it) with suffix to be written to. The receiver get the data from the channel in 4 bytes portions decode it with *hamming-code(31,26,3)* method and write it to the desired file.
