@@ -2,9 +2,11 @@
 This reposatory is part of a small project I did in my B.sc in Elecrical engineering at [Tel-Aviv University](https://www.tau.ac.il). The project about computer comunication and sockets operation.
 
 **Description & Functuinallity**:
+
 The purpose of this exercise is to implement a noisy channel model with sender, receiver and channel.
 the channel in the command line arguments the type of noise and a integer n (noise parameter). there are 2 types of noise:
     *Random - ```-r``` - in this case every bit have a flipping probabilty of n/2^16.
+
 the sender gets in the command line arguments IP number and port number from the
 
 **Comiplation**:
