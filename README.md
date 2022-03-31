@@ -1,7 +1,7 @@
 # PA1 - Noisy Channel
 This reposatory is part of a small project I did in my B.sc in Elecrical engineering at [Tel-Aviv University](https://www.tau.ac.il). The project about computer comunication and sockets operation.
 
-##*Description & Functuinallity*:
+## *Description & Functuinallity*:
 
 The purpose of this exercise is to implement a noisy channel model with sender, receiver and channel.
 the channel in the command line arguments the type of noise and a integer n (noise parameter). there are 2 types of noise:
