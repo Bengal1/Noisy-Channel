@@ -10,6 +10,10 @@ the channel in the command line arguments the type of noise and a integer n (noi
 
 the sender gets in the command line arguments IP number and port number from the
 
+For more information on *Hamming Code*:
+- [3Blue1Brown] (https://www.youtube.com/watch?v=X8jsijhllIA&t=906s) - 2 Videos which explains it well in simple language.
+- [Wikipedia] (https://en.wikipedia.org/wiki/Hamming_code) - there are a lot of websites and books that explain hamming code well.
+
 **Comiplation**:
 1. Compile via Visual Studio -
 - Open project in Visual Studio.
@@ -31,7 +35,4 @@ the sender gets in the command line arguments IP number and port number from the
 4. To end sender/receiver run put in 'quit' (case-unsensitive) when asked for file name.
 5. Channel's noise: the noise parameter is in hamming border of success.
 
-
-
-$\text{S}_1(N) = \sum_{p=1}^N \text{E}(p)$
 
