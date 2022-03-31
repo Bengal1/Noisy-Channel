@@ -40,3 +40,4 @@ For more information on *Hamming Code* :
 5. Channel's noise: the noise parameter is in hamming border of success.
 
 
+O(n<sup>2</sup>)
