@@ -5,8 +5,8 @@ This reposatory is part of a small project I did in my B.sc in Elecrical enginee
 
 The purpose of this exercise is to implement a noisy channel model with sender, receiver and channel.
 the channel in the command line arguments the type of noise and a integer n (noise parameter). there are 2 types of noise:
--  Random ```-r``` - in this case every bit have a flipping probabilty of *n/2^{16}*.
--  Deterministic ```-d``` - in this case every *n-th* bit flipped.
+-  Random `-r` - in this case every bit have a flipping probabilty of *n/2^{16}*.
+-  Deterministic `-d` - in this case every *n-th* bit flipped.
 
 The channel receives data from the sender and add noise to it according to the set arguments, and send it to the receiver.
 
@@ -27,9 +27,7 @@ For more information on *Hamming Code*:
 2. Compile via Developer Command Prompt for VS -
 - Open Developer 'Command Prompt for VS' (application file inside 'Visual Studio Tools' directory).
 - Go to directory of the wanted C file.
-- Type on the Command Prompt :```
-    cl /EHsc name.c``` 
-  (name of the file instead of 'name.c').
+- Type on the Command Prompt :`cl /EHsc name.c` (name of the file instead of 'name.c').
 - Type command for the executable file: 'name argument1 argument2'
 * for more information : [https://docs.microsoft.com](https://docs.microsoft.com/en-us/cpp/build/walkthrough-compiling-a-native-cpp-program-on-the-command-line?view=msvc-170).
 
