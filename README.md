@@ -30,3 +30,8 @@ the sender gets in the command line arguments IP number and port number from the
 3. To continue to another sender/receiver interval put in an existing file name with suffix to be read, non-valid name will end the run.
 4. To end sender/receiver run put in 'quit' (case-unsensitive) when asked for file name.
 5. Channel's noise: the noise parameter is in hamming border of success.
+
+
+
+$\text{S}_1(N) = \sum_{p=1}^N \text{E}(p)$
+
