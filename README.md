@@ -1,6 +1,9 @@
 # PA1
 This reposatory is part of a small project I did in my B.sc degree. the project about computer comunication and sockets operation.
 
+**Description & Functuinallity**:
+
+
 **Comiplation**:
 1. Compile via Visual Studio -
 - Open project in Visual Studio.
@@ -14,7 +17,8 @@ This reposatory is part of a small project I did in my B.sc degree. the project 
 * for more information : https://docs.microsoft.com/en-us/cpp/build/walkthrough-compiling-a-native-cpp-program-on-the-command-line?view=msvc-170
 
 
-**Operation & conditions:**
+**Operation & conditions**:
+
 Operate as described in PA1 + all bonuses.
 1. The first must be channel.exe that we will have the ports numbers and ip number. the order doesn't matter between sender.exe and receiver.exe
 2. In case of channel failure, both sender and receiver will have connection failure with code: 100
