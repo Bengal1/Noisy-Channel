@@ -1,5 +1,5 @@
 # PA1 - Noisy Channel
-This reposatory is part of a small project I did in my B.sc degree. the project about computer comunication and sockets operation.
+This reposatory is part of a small project I did in my B.sc in Elecrical engineering at [Tel-Aviv University](https://www.tau.ac.il). The project about computer comunication and sockets operation.
 
 **Description & Functuinallity**:
 
@@ -15,7 +15,7 @@ This reposatory is part of a small project I did in my B.sc degree. the project 
     cl /EHsc name.c``` 
   (name of the file instead of 'name.c').
 - Type command for the executable file: 'name argument1 argument2'
-* for more information : [https://docs.microsoft.com]( https://docs.microsoft.com/en-us/cpp/build/walkthrough-compiling-a-native-cpp-program-on-the-command-line?view=msvc-170).
+* for more information : [https://docs.microsoft.com](https://docs.microsoft.com/en-us/cpp/build/walkthrough-compiling-a-native-cpp-program-on-the-command-line?view=msvc-170).
 
 
 **Operation & conditions**:
