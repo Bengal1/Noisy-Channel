@@ -5,7 +5,7 @@ This reposatory is part of a small project I did in my B.sc in Elecrical enginee
 
 The purpose of this exercise is to implement a noisy channel model with sender, receiver and channel.
 the channel in the command line arguments the type of noise and a integer n (noise parameter). there are 2 types of noise:
--  Random `-r` - in this case every bit have a flipping probabilty of *<frac> n/2<sup>16</sup> </frac>*.
+-  Random `-r` - in this case every bit have a flipping probabilty of *n<frac>2<sup>16</sup></frac>*.
 -  Deterministic `-d` - in this case every *n-th* bit flipped.
 
 The channel receives data from the sender and add noise to it according to the set arguments, and send it to the receiver.
