@@ -7,8 +7,13 @@ The purpose of this exercise is to implement a noisy channel model with sender, 
 the channel in the command line arguments the type of noise and a integer n (noise parameter). there are 2 types of noise:
 - Random ```-r``` - in this case every bit have a flipping probabilty of *n/2^{16}*.
 - - Deterministic ```-d``` - in this case every *n-th* bit flipped.
+the channel receives data from the sender and add noise to it according to the set arguments, and send it to the receiver.
 
-the sender gets in the command line arguments IP number and port number from the
+The sender gets in the command line arguments IP number and port number (manually insert from the server output). With those argument the sender connects to the channel via TCP socket.
+The sender gets from stdin a file name (or full path to it) with suffix, read all data from the file, encode it with *hamming-code(31,26,3)* method and send it to the channel via TCP socket in 4 bytes portions.
+
+The receiver gets in the command line arguments IP number and port number (manually insert from the server output). With those argument the sender connects to the channel via TCP socket.
+The sender gets from stdin a file name (or full path to it) with suffix to be written to. The receiver get the data from the channel in 4 bytes portions decode it with *hamming-code(31,26,3)* method and write it to the desired file.
 
 For more information on *Hamming Code*:
 - [3Blue1Brown](https://www.youtube.com/watch?v=X8jsijhllIA&t=906s) - 2 Videos which explains it well in simple language.
