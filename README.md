@@ -4,7 +4,7 @@ This reposatory is part of a small project I did in my B.sc degree. the project 
 *Comiplation*:
 1. Compile via Visual Studio -
 - Open project in Visual Studio.
-- Build Solution. & Run (F5/ctrl + F5).
+- Build Solution & Run (F5/ctrl + F5).
 
 2. Compile via Developer Command Prompt for VS -
 - Open Developer 'Command Prompt for VS' (application file inside 'Visual Studio Tools' directory).
