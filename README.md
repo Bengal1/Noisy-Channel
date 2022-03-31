@@ -8,7 +8,6 @@ This reposatory is part of a small project I did in my B.sc degree. the project 
 1. Compile via Visual Studio -
 - Open project in Visual Studio.
 - Build Solution & Run (F5/ctrl + F5).
-
 2. Compile via Developer Command Prompt for VS -
 - Open Developer 'Command Prompt for VS' (application file inside 'Visual Studio Tools' directory).
 - Go to directory of the wanted C file.
@@ -20,8 +19,6 @@ This reposatory is part of a small project I did in my B.sc degree. the project 
 
 
 **Operation & conditions**:
-
-Operate as described in PA1 + all bonuses.
 1. The first must be channel.exe that we will have the ports numbers and ip number. the order doesn't matter between sender.exe and receiver.exe
 2. In case of channel failure, both sender and receiver will have connection failure with code: 100
 3. To continue to another channel interval answer 'yes' (case-unsensitive), every other answer will stop channel's run.
