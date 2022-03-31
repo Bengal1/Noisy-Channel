@@ -1,4 +1,4 @@
-# PA1
+# PA1 - Noisy Channel
 This reposatory is part of a small project I did in my B.sc degree. the project about computer comunication and sockets operation.
 
 **Description & Functuinallity**:
