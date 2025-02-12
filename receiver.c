@@ -29,44 +29,31 @@
 #define MASK 0x03FFFFFF
 
 
-int power2(int x)
+int powerOfTwo(int x)
 {
-	int res = 1;
-
 	if (x < 0) {
-		printf("argument is negative!\n");
+		printf("Error: Negative exponent is not allowed!\n");
 		return FAILED;
 	}
-
-	for (int i = 0; i < x; i++) {
-		res *= 2;
-	}
-	return res;
+	return 1 << x;
 }
 
-char* lowercase(char* str)
+char* toLowerCase(char* str)
 {
-	int str_size = strlen(str);
-	char* str_before = str, * str_after = NULL;
-
-	if ((str_after = (char*)calloc(1, (str_size + 1) * sizeof(char))) == NULL) {
-		printf("Allocation Failed\n");
-		exit(EXIT_FAILURE);
-	}
-
-	if (str != NULL) {
-		for (int i = 0; i < str_size; i++) {
-			(*(str_after + i)) = tolower((*(str_before + i)));
-		}
-	}
-	else {
+	if (str == NULL) {
 		printf("Attempt to operate on NULL pointer\n");
 		return NULL;
 	}
-	return str_after;
+
+	int str_size = strlen(str);
+
+	for (int i = 0; i < str_size; i++) {
+		str[i] = tolower(str[i]);
+	}
+	return str;
 }
 
-void resources_release(SOCKET socket, FILE* fp, bool end)
+void resourcesRelease(SOCKET socket, FILE* fp, bool end)
 {
 	SOCKET* s = &socket;
 
@@ -75,105 +62,48 @@ void resources_release(SOCKET socket, FILE* fp, bool end)
 		fp = NULL;
 	}
 	if (end) {
-		shutdown(socket, 2);
+		shutdown(socket, SD_BOTH);
 		WSACleanup();
 		return;
 	}
 	if (socket != INVALID_SOCKET) {
 		closesocket(socket);
 		(*s) = INVALID_SOCKET;
-	}	
+	}
 
 	return;
 }
 
-bool parity_bit_check(int type, unsigned int number)
+bool parityBitCheck(int type, unsigned int number)
 {
 	int on_bits = 0;
 	unsigned int num = number;
+	int shift = (type == 0) ? 1 : (1 << (type - 1)); // Determine skip pattern
 
-	switch (type) {
-	case 0: { //p0 - all bits parity - check for 2 errors
-		while (num > 0) {
-			if (num & 0b1) {
-				on_bits++;
-			}
-			num = num >> 1;
+	if (type == 0) { // Special case: count all bits
+		while (num) {
+			on_bits += (num & 1);
+			num >>= 1;
 		}
-		break;
-	}
-	case 1: { // p1
-		num = num >> 1;
-		while (num > 0) {
-			if (num & 0b1) {
-				on_bits++;
-			}
-			num = num >> 2;
-		}
-		break;
-	}
-	case 2: { //p2
-		num = num >> 2;
-		while (num > 0) {
-			for (int i = 0; i < 2; i++) {
-				if (num & 0b1) {
-					on_bits++;
-				}
-				num = num >> 1;
-			}
-			num = num >> 2;
-		}
-		break;
-	}
-	case 3: { //p3
-		num = num >> 4;
-		while (num > 0) {
-			for (int i = 0; i < 4; i++) {
-				if (num & 0b1) {
-					on_bits++;
-				}
-				num = num >> 1;
-			}
-			num = num >> 4;
-		}
-		break;
-	}
-	case 4: { //p4
-		num = num >> 8;
-		while (num > 0) {
-			for (int i = 0; i < 8; i++) {
-				if (num & 0b1) {
-					on_bits++;
-				}
-				num = num >> 1;
-			}
-			num = num >> 8;
-		}
-		break;
-	}
-	case 5: { //p5
-		num = num >> 16;
-		while (num > 0) {
-			if (num & 0b1) {
-				on_bits++;
-			}
-			num = num >> 1;
-		}
-		break;
-	}
-	}
-	if (on_bits % 2 == 0) {
-		return true;
 	}
 	else {
-		return false;
+		num >>= shift; // Skip initial bits
+		while (num) {
+			for (int i = 0; i < shift && num; i++) {
+				on_bits += (num & 1);
+				num >>= 1;
+			}
+			num >>= shift; // Skip bits
+		}
 	}
+
+	return (on_bits % 2 == 0);
 }
 
 
-unsigned int hamming_decode(char* mes, int* errors)
+unsigned int hammingDecode(char* mes, int* errors)
 {
-	int j = 0, error_pose = 0; 
+	int j = 0, error_pose = 0;
 	unsigned int res = 0, message = 0, * imessage = NULL;
 	int par_checks[5] = { 0 };
 
@@ -183,34 +113,33 @@ unsigned int hamming_decode(char* mes, int* errors)
 
 	//error detection & correction
 	for (int i = 1; i < 6; i++) {
-		if ((parity_bit_check(i, message)) == false) {
-			error_pose += power2(i - 1);
+		if ((parityBitCheck(i, message)) == false) {
+			error_pose += powerOfTwo(i - 1);
 		}
 	}
-	if ((parity_bit_check(0, message) == false) && (error_pose == 0)) {
-		message = message ^ 0b1;
+	if ((parityBitCheck(0, message) == false) && (error_pose == 0)) {
+		message = message ^ P1;
 		(*errors)++;
 	}
 	if (error_pose > 0) {
-		message = message ^ (power2(error_pose)); //1-bit error correct
+		message = message ^ (powerOfTwo(error_pose)); //1-bit error correct
 		(*errors)++;
 	}
-	
+
 	//extract data
 	for (int i = 3; i < FOUR_BYTES; i++) {
 		if ((i == 4) || (i == 8) || (i == 16)) {
 			continue;
 		}
 		else {
-			if (power2(i) & message) {
-				res += power2(j);
+			if (powerOfTwo(i) & message) {
+				res += powerOfTwo(j);
 			}
 			j++;
 		}
-	}	
-	
+	}
 	res = res & MASK;
-	
+
 	return res;
 }
 
@@ -227,7 +156,7 @@ int main(int argc, char* argv[])
 	strcpy(ip_number, argv[1]);
 	port_number = atoi(argv[2]);
 	perrors = &errors;
-	
+
 	// Initialize Winsock
 	WSADATA wsaData;
 	int iResult, ports[2];
@@ -245,36 +174,36 @@ int main(int argc, char* argv[])
 	while (1) { // receiver routine
 		printf("enter file name:\n");
 		gets(file_name);
-		if (0 == strcmp(lowercase(file_name), "quit")) {
+		if (0 == strcmp(toLowerCase(file_name), "quit")) {
 			printf("Quiting...\n");
-			resources_release(INVALID_SOCKET, NULL, true);
+			resourcesRelease(INVALID_SOCKET, NULL, true);
 			return EXIT_SUCCESS;
 		}
 		if ((sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) == INVALID_SOCKET) {
 			printf("socket function failed with error: %ld\n", WSAGetLastError());
-			resources_release(INVALID_SOCKET, NULL, true);
+			resourcesRelease(INVALID_SOCKET, NULL, true);
 			return EXIT_FAILURE;
 		}
 		if ((connect(sock, (struct sockaddr*)&sock_info, sizeof(sock_info))) == SOCKET_ERROR) {
 			printf("connect() failed with error code: %d\n", WSAGetLastError());
-			resources_release(INVALID_SOCKET, NULL, true);
+			resourcesRelease(INVALID_SOCKET, NULL, true);
 			return EXIT_FAILURE;
 		}
 		if ((fptr = fopen(file_name, "wb")) == NULL) {
 			printf("failed to open file!\n");
-			resources_release(sock, NULL, true);
+			resourcesRelease(sock, NULL, true);
 			return EXIT_FAILURE;
 		}
 		bytes_recv = recv(sock, message, BUFFER_LEN, 0); //first message
-		if ((h_buffer = hamming_decode(message, perrors)) == FAILED) { //hamming (31,26,3)
-			resources_release(sock, fptr, true);
+		if ((h_buffer = hammingDecode(message, perrors)) == FAILED) { //hamming (31,26,3)
+			resourcesRelease(sock, fptr, true);
 			return EXIT_FAILURE;
 		}
 		while ((bytes_recv = recv(sock, message, BUFFER_LEN, 0)) > 0)
 		{
 			w_buffer = h_buffer;
-			if ((h_buffer = hamming_decode(message, perrors)) == FAILED) { //hamming (31,26,3)
-				resources_release(sock, fptr, true);
+			if ((h_buffer = hammingDecode(message, perrors)) == FAILED) { //hamming (31,26,3)
+				resourcesRelease(sock, fptr, true);
 				return EXIT_FAILURE;
 			}
 			fwrite(&w_buffer, 1U, BUFFER_LEN * sizeof(char), fptr); //write to files
@@ -283,19 +212,19 @@ int main(int argc, char* argv[])
 		}
 		if (bytes_recv < 0) { //recv() failure
 			printf("recv() failed with error code: %d\n", WSAGetLastError());
-			resources_release(sock, fptr, true);
+			resourcesRelease(sock, fptr, true);
 			return EXIT_FAILURE;
 		}
 		//last message
 		fwrite(&h_buffer, 1U, (strlen(message) - 1) * sizeof(char), fptr);
-		
+
 		data_recv++;
 		data_recv *= BUFFER_LEN;
 		fseek(fptr, 0, SEEK_END);
 		file_len = ftell(fptr);
 		printf("received: %d\nwrote: %d\ncorrected %d errors\n", data_recv, file_len, errors);
-		
-		resources_release(INVALID_SOCKET, fptr, false);
+
+		resourcesRelease(INVALID_SOCKET, fptr, false);
 		data_recv = 0, file_len = 0, errors = 0;
 	}
 	return EXIT_SUCCESS;
