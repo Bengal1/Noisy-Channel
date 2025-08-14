@@ -1,5 +1,5 @@
 # Noisy Channel
-This reposatory is part of a small project I did in my B.sc in Elecrical engineering at [Tel-Aviv University](https://www.tau.ac.il). The project about computer comunication and sockets operation.
+This reposatory is part of a small project I did in my B.sc in Elecrical Engineering. The project about computer comunication and sockets operation.
 
 ### *Description & Functuinallity*:
 
